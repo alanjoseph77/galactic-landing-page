@@ -1,4 +1,4 @@
-# 🌌 Cosmic Landing Page
+# 🌌 Galactic Landing Page
 
 A visually stunning, interactive space-themed landing page created using only HTML and CSS — no images required.
 ## 🔗 Live Demo
