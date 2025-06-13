@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinit Universe - Journey Beyond Reality</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #06ffa5;
+            --pink: #ec4899;
+            --orange: #f97316;
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text: #ffffff;
+            --text-muted: #a1a1aa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Starfield Background */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at top, #1e1b4b 0%, #0f0f23 50%, #000000 100%);
+            z-index: -10;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -9;
+        }
+
+        .stars::before, .stars::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 30px, #fff, transparent),
+                radial-gradient(1px 1px at 300px 120px, #06ffa5, transparent),
+                radial-gradient(2px 2px at 450px 200px, #ec4899, transparent);
+            background-repeat: repeat;
+            background-size: 500px 300px;
+        }
+
+        .stars::before {
+            animation: twinkle 15s linear infinite;
+        }
+
+        .stars::after {
+            animation: twinkle 20s linear infinite reverse;
+            opacity: 0.7;
+        }
+
+        @keyframes twinkle {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-500px) translateY(-300px); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            padding: 0.5rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50px;
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 20% 70%, rgba(6, 255, 165, 0.2) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, var(--accent), var(--primary), var(--pink));
+            background-size: 300% 300%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 1.5s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            box-shadow: 0 12px 40px rgba(6, 255, 165, 0.3);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.6;
+            animation: floatAround 15s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 5s;
+            background: linear-gradient(45deg, var(--accent), var(--pink));
+        }
+
+        .floating-element:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 10s;
+            background: linear-gradient(45deg, var(--pink), var(--orange));
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(90deg); }
+            50% { transform: translate(-10px, -40px) rotate(180deg); }
+            75% { transform: translate(-30px, 10px) rotate(270deg); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(6, 255, 165, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .feature-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 2rem;
+            background: linear-gradient(45deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .about-image {
+            position: relative;
+            height: 400px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '🌌';
+            font-size: 8rem;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent);
+            display: block;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Documentation Section */
+        .documentation {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(6, 255, 165, 0.05));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .documentation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(6, 255, 165, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .documentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .doc-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--pink));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+            transform-origin: left;
+        }
+
+        .doc-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .doc-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(6, 255, 165, 0.2);
+        }
+
+        .doc-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .doc-card:hover .doc-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+        }
+
+        .doc-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .doc-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .doc-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .doc-tag {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .doc-link {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .doc-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .doc-card:hover .doc-link::after {
+            width: 100%;
+        }
+
+        .doc-card:hover .doc-link {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 2rem;
+            background: linear-gradient(45deg, rgba(6, 255, 165, 0.05), rgba(99, 102, 241, 0.05));
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .form-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-input {
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(6, 255, 165, 0.3);
+        }
+
+        .form-textarea {
+            grid-column: 1 / -1;
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .form-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .doc-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .documentation {
+                padding: 4rem 1rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+        }
+
+        .cursor.hover {
+            transform: scale(2);
+            border-color: var(--pink);
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-bg"></div>
+    <div class="stars"></div>
+    <div class="cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">INFINIT UNIVERSE</a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#documentation" class="nav-link">Docs</a></li>
+                <li><a href="#stats" class="nav-link">Stats</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">INFINIT UNIVERSE</h1>
+            <p class="hero-subtitle">Journey Beyond the Stars</p>
+            <p class="hero-description">
+                Embark on an extraordinary odyssey through the cosmos where cutting-edge technology meets infinite possibilities. 
+                Discover galaxies, explore nebulae, and witness the birth of stars in this revolutionary digital universe.
+            </p>
+            <div class="cta-buttons">
+                <a href="#features" class="btn btn-primary">Explore Universe</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title animate-on-scroll">Cosmic Features</h2>
+        <div class="features-grid">
+            <div class="feature-card animate-on-scroll" onclick="window.open('digit-recognition.html', '_blank')" style="cursor: pointer;">
+                <div class="feature-icon">🚀</div>
+                <h3 class="feature-title">Interstellar Travel</h3>
+                <p class="feature-description">Navigate through space with our advanced propulsion systems and discover new worlds beyond imagination.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">🌌</div>
+                <h3 class="feature-title">Galaxy Exploration</h3>
+                <p class="feature-description">Explore vast galaxies with billions of stars, each offering unique planetary systems and cosmic phenomena.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">⭐</div>
+                <h3 class="feature-title">Star Formation</h3>
+                <p class="feature-description">Witness the birth of stars and the creation of elements that form the building blocks of life.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">🛸</div>
+                <h3 class="feature-title">Alien Civilizations</h3>
+                <p class="feature-description">Encounter diverse alien species and learn about their unique cultures and advanced technologies.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">🌍</div>
+                <h3 class="feature-title">Planetary Systems</h3>
+                <p class="feature-description">Discover habitable planets with diverse ecosystems and the potential for life as we know it.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">💫</div>
+                <h3 class="feature-title">Cosmic Events</h3>
+                <p class="feature-description">Experience spectacular cosmic events like supernovas, black holes, and gravitational waves.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <div class="about-content animate-on-scroll">
+                <h2>About Our Mission</h2>
+                <p>
+                    Infinit Universe represents the pinnacle of space exploration technology, combining cutting-edge science 
+                    with immersive digital experiences. Our mission is to make the wonders of the cosmos accessible to everyone.
+                </p>
+                <p>
+                    Through advanced simulation and virtual reality, we create authentic cosmic experiences that educate, 
+                    inspire, and ignite the imagination. Join millions of explorers on this incredible journey.
+                </p>
+                <p>
+                    Our team of astrophysicists, engineers, and designers work tirelessly to ensure every detail of our 
+                    universe is scientifically accurate and visually stunning.
+                </p>
+            </div>
+            <div class="about-image animate-on-scroll"></div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats">
+        <h2 class="section-title animate-on-scroll">Universe Statistics</h2>
+        <div class="stats-grid">
+            <div class="stat-card animate-on-scroll">
+                <span class="stat-number">∞</span>
+                <span class="stat-label">Galaxies Explored</span>
+            </div>
+            <div class="stat-card animate-on-scroll">
+                <span class="stat-number">10M+</span>
+                <span class="stat-label">Active Explorers</span>
+            </div>
+            <div class="stat-card animate-on-scroll">
+                <span class="stat-number">50K+</span>
+                <span class="stat-label">Planets Discovered</span>
+            </div>
+            <div class="stat-card animate-on-scroll">
+                <span class="stat-number">99.9%</span>
+                <span class="stat-label">Scientific Accuracy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="documentation" class="documentation">
+        <div class="documentation-container">
+            <h2 class="section-title animate-on-scroll">COSMIC DOCUMENTATION</h2>
+            <p class="section-subtitle animate-on-scroll">Explore our comprehensive guides and technical documentation</p>
+            
+            <div class="doc-grid">
+                <div class="doc-card animate-on-scroll" onclick="window.open('digit-recognition-docs.html', '_blank')">
+                    <div class="doc-icon">📚</div>
+                    <h3 class="doc-title">Complete Documentation</h3>
+                    <p class="doc-description">Comprehensive guide covering all aspects of our digit recognition system with detailed examples and code.</p>
+                    <div class="doc-tags">
+                        <span class="doc-tag">Complete Guide</span>
+                        <span class="doc-tag">97.48% Accuracy</span>
+                    </div>
+                    <div class="doc-link">Explore Docs →</div>
+                </div>
+                
+                <div class="doc-card animate-on-scroll" onclick="window.open('digit-recognition.html', '_blank')">
+                    <div class="doc-icon">🧠</div>
+                    <h3 class="doc-title">Live AI Demo</h3>
+                    <p class="doc-description">Try our digit recognition system live! Upload handwritten digits and see AI predictions in real-time.</p>
+                    <div class="doc-tags">
+                        <span class="doc-tag">Interactive</span>
+                        <span class="doc-tag">TensorFlow</span>
+                    </div>
+                    <div class="doc-link">Try Demo →</div>
+                </div>
+                
+                <div class="doc-card animate-on-scroll" onclick="window.open('explore-projects.html', '_blank')">
+                    <div class="doc-icon">🚀</div>
+                    <h3 class="doc-title">Project Explorer</h3>
+                    <p class="doc-description">Discover all our cosmic projects including e-commerce, dashboards, and AI applications.</p>
+                    <div class="doc-tags">
+                        <span class="doc-tag">Portfolio</span>
+                        <span class="doc-tag">Multiple Projects</span>
+                    </div>
+                    <div class="doc-link">Explore Projects →</div>
+                </div>
+                
+                <div class="doc-card animate-on-scroll">
+                    <div class="doc-icon">🔬</div>
+                    <h3 class="doc-title">API Reference</h3>
+                    <p class="doc-description">Technical API documentation for developers who want to integrate our services into their applications.</p>
+                    <div class="doc-tags">
+                        <span class="doc-tag">Developer Tools</span>
+                        <span class="doc-tag">REST API</span>
+                    </div>
+                    <div class="doc-link">View API →</div>
+                </div>
+                
+                <div class="doc-card animate-on-scroll">
+                    <div class="doc-icon">⚡</div>
+                    <h3 class="doc-title">Quick Start Guide</h3>
+                    <p class="doc-description">Get up and running in minutes with our step-by-step quick start guide and installation instructions.</p>
+                    <div class="doc-tags">
+                        <span class="doc-tag">Beginner Friendly</span>
+                        <span class="doc-tag">Setup Guide</span>
+                    </div>
+                    <div class="doc-link">Quick Start →</div>
+                </div>
+                
+                <div class="doc-card animate-on-scroll">
+                    <div class="doc-icon">🎓</div>
+                    <h3 class="doc-title">Tutorials</h3>
+                    <p class="doc-description">Learn with hands-on tutorials covering machine learning, computer vision, and web development.</p>
+                    <div class="doc-tags">
+                        <span class="doc-tag">Educational</span>
+                        <span class="doc-tag">Step-by-Step</span>
+                    </div>
+                    <div class="doc-link">Learn Now →</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2 class="section-title animate-on-scroll">Join Our Mission</h2>
+            <p class="animate-on-scroll">Ready to embark on the ultimate cosmic journey? Get in touch with our exploration team.</p>
+            
+            <form class="contact-form animate-on-scroll">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="First Name" required>
+                    <input type="text" class="form-input" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="Email Address" required>
+                    <input type="tel" class="form-input" placeholder="Phone Number">
+                </div>
+                <textarea class="form-input form-textarea" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary">Launch Mission</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="creator-section" style="margin-bottom: 2rem;">
+                <h3 style="font-family: 'Orbitron', monospace; font-size: 1.3rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--accent), var(--primary)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    🚀 CREATED BY ALAN JOSEPH
+                </h3>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                    Innovative developer specializing in AI, machine learning, and cutting-edge web technologies. 
+                    Passionate about creating cosmic digital experiences that push the boundaries of what's possible.
+                </p>
+            </div>
+              <div class="social-links" style="display: flex; gap: 100px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://www.linkedin.com/in/alan-joseph-monichan" target="_blank" class="social-link" style="text-align: center; text-decoration: none; color: inherit;">
+                    <div style="font-size: 2rem;">💼</div>
+                    <div style="font-size: 0.9rem;">LinkedIn</div>
+                </a>
+                <a href="https://github.com/alanjoseph77" target="_blank" class="social-link" style="text-align: center; text-decoration: none; color: inherit;">
+                    <div style="font-size: 2rem;">🐱</div>
+                    <div style="font-size: 0.9rem;">GitHub</div>
+                </a>
+            </div>
+
+
+            <p>&copy; 2025 Infinit Universe. All rights reserved. | Created by <strong>Alan Joseph</strong> | Journey Beyond Reality</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.7;">
+                Designed & Developed with 🌌 by Alan Joseph | Cosmic Innovation & AI Excellence
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const links = document.querySelectorAll('a, button, .btn');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+        });
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Enhanced scroll animations for documentation cards
+        const docObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Stagger the animation for a wave effect
+                    setTimeout(() => {
+                        entry.target.classList.add('animated');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.doc-card').forEach(el => {
+            docObserver.observe(el);
+        });
+
+        // Add special hover sound effect simulation for doc cards
+        document.querySelectorAll('.doc-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Create a subtle glow effect
+                const glow = document.createElement('div');
+                glow.style.position = 'absolute';
+                glow.style.top = '0';
+                glow.style.left = '0';
+                glow.style.width = '100%';
+                glow.style.height = '100%';
+                glow.style.background = 'radial-gradient(circle, rgba(6, 255, 165, 0.1) 0%, transparent 70%)';
+                glow.style.pointerEvents = 'none';
+                glow.style.borderRadius = '20px';
+                glow.style.animation = 'docGlow 0.8s ease-out';
+                
+                card.style.position = 'relative';
+                card.appendChild(glow);
+                
+                setTimeout(() => glow.remove(), 800);
+            });
+        });
+
+        // Interactive Background
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg) {
+                heroBg.style.transform = `translate(${mouseX * 20}px, ${mouseY * 20}px) scale(1.1)`;
+            }
+        });
+
+        // Particle Click Effect
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = `hsl(${Math.random() * 360}, 70%, 70%)`;
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '9999';
+                
+                const angle = (Math.PI * 2 * i) / 10;
+                const velocity = 50 + Math.random() * 50;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                particle.style.animation = `particle-explosion 1s ease-out forwards`;
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 1000);
+            }
+        });
+
+        // Add particle explosion animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes particle-explosion {
+                0% {
+                    transform: translate(0, 0) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Form Submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Create success message
+            const successMsg = document.createElement('div');
+            successMsg.innerHTML = '🚀 Mission launched successfully! Welcome to the universe!';
+            successMsg.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(45deg, var(--accent), var(--primary));
+                color: white;
+                padding: 2rem;
+                border-radius: 20px;
+                font-size: 1.2rem;
+                font-weight: bold;
+                text-align: center;
+                z-index: 10000;
+                animation: successPulse 3s ease-out forwards;
+            `;
+            
+            document.body.appendChild(successMsg);
+            
+            setTimeout(() => successMsg.remove(), 3000);
+        });
+
+        // Add success animation
+        const successStyle = document.createElement('style');
+        successStyle.textContent = `
+            @keyframes successPulse {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+                20% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+                90% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(successStyle);
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Dynamic Stats Counter
+        const animateCounter = (element, target, duration = 2000) => {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (target === Infinity) {
+                    element.textContent = '∞';
+                } else if (target >= 1000000) {
+                    element.textContent = (current / 1000000).toFixed(1) + 'M+';
+                } else if (target >= 1000) {
+                    element.textContent = (current / 1000).toFixed(0) + 'K+';
+                } else if (target < 100) {
+                    element.textContent = current.toFixed(1) + '%';
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        };
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numbers = [Infinity, 10000000, 50000, 99.9];
+                    document.querySelectorAll('.stat-number').forEach((stat, index) => {
+                        animateCounter(stat, numbers[index]);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('#stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
